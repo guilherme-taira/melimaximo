@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\Sanctum;
 
 class UserController extends Controller
 {
@@ -39,6 +40,12 @@ class UserController extends Controller
     public function show($id, Request $request)
     {
         $users = User::where('id', $id)->first();
+
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
         return response()->json($users);
     }
 
@@ -80,7 +87,6 @@ class UserController extends Controller
             curl_close($ch);
             $dados = json_decode($response);
             return response()->json($dados);
-
         } catch (\Exception $e) {
             //return response()->json($i);
 
