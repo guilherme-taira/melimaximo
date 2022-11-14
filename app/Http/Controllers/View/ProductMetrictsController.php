@@ -12,3 +12,4 @@ class ProductMetrictsController extends Controller
         return view('layouts',['id' => $request->all()]);
     }
 }
+

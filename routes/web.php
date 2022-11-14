@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 // ROTAS GET
 Route::get('/metrics',[ProductMetrictsController::class,'getMetrics'])->name('metrics');
-
+//Route::get('/GetOrderHotmart',[])
 // ROTAS RESOURCE
 Route::resource('hotmart','App\Http\Controllers\Hotmart\hotmartController')->names('hotmart')->parameters(['hotmart' => 'id']);
 

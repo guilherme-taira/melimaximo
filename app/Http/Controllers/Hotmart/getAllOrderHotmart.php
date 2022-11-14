@@ -16,7 +16,7 @@ class getAllOrderHotmart implements RequestApi
 
     public function resource()
     {
-        return $this->get('payments/api/v1/sales/history?transaction_status=APPROVED');
+        return $this->get('payments/api/v1/sales/history?transaction_status=COMPLETE');
     }
 
     public function __construct($client_id)
@@ -50,8 +50,7 @@ class getAllOrderHotmart implements RequestApi
             curl_close($ch);
 
             if($httpcode == 401){
-                $auth = new AuthController('MTRjODhmNTgtMmVkOC00YTIyLWJhMTctYjI5MjI0ODAxY2E2OjlmYjc0YzdlLTkwZTYtNDkxZi04ZTI0LTE3NzM1ZWJiNTQxZg==','14c88f58-2ed8-4a22-ba17-b29224801ca6','9fb74c7e-90e6-491f-8e24-17735ebb541f');
-                $auth->resource();
+                $auth = (new AuthController('Basic MTRjODhmNTgtMmVkOC00YTIyLWJhMTctYjI5MjI0ODAxY2E2OjlmYjc0YzdlLTkwZTYtNDkxZi04ZTI0LTE3NzM1ZWJiNTQxZg==','14c88f58-2ed8-4a22-ba17-b29224801ca6','9fb74c7e-90e6-491f-8e24-17735ebb541f'))->resource();
             }
 
             $dados = json_decode($response);

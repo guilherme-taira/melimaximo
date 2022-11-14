@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\Sanctum;
-
+header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");
 class UserController extends Controller
 {
     /**
@@ -75,21 +75,29 @@ class UserController extends Controller
     public function getUserApiMl(Request $request)
     {
         $endpointMetrics = "https://api.mercadolibre.com/users/$request->sellerId";
-        try {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $endpointMetrics);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($ch);
-            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-            $dados = json_decode($response);
-            return response()->json($dados);
-        } catch (\Exception $e) {
-            //return response()->json($i);
 
+        while (true) {
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $endpointMetrics);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                curl_close($ch);
+                $dados = json_decode($response);
+                if ($httpcode == '200') {
+                    return response()->json($dados);
+                    break;
+                }else if($httpcode == '429'){
+                    continue;
+                }
+            } catch (\Exception $e) {
+                //return response()->json($i);
+                continue;
+            }
         }
     }
 }

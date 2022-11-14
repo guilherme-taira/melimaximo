@@ -62,4 +62,19 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public static function AddNewUser(String $name,String $email,String $password){
+        $newUser = new User();
+        $newUser->name = $name;
+        $newUser->email = $email;
+        $newUser->password = bcrypt($password);
+        $newUser->save();
+        return $newUser->getId();
+    }
+
+    public function getId(){
+        return $this->attributes['id'];
+    }
+
+
 }

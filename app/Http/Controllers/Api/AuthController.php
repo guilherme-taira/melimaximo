@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-     /**
+    /**
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -24,8 +24,8 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         // VALIDA O EMAIL
-        if(!$user){
-            return response(['message' => 'Credencias Inválidas!'],401);
+        if (!$user) {
+            return response(['message' => 'Credencias Inválidas!'], 401);
         }
 
         $token = $user->createToken('newToken')->plainTextToken;
@@ -38,11 +38,10 @@ class AuthController extends Controller
             'code' => 200,
         ];
 
-        return response()->json($response,201);
-
+        return response()->json($response, 201);
     }
 
-     /**
+    /**
      * Get the token array structure.
      *
      * @param  string $token
@@ -61,7 +60,8 @@ class AuthController extends Controller
     }
 
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
 
         $request->validate([
             'name' => 'required|string',
@@ -82,6 +82,6 @@ class AuthController extends Controller
             'token' => $token,
         ];
 
-        return response()->json($response,201);
+        return response()->json($response, 201);
     }
 }

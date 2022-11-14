@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\getNumberVisit;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
 //header('Access-Control-Allow-Origin: *');
 /*
 |--------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Hotmart;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Hotmart\Services\GetOrderRequestController;
 use Illuminate\Http\Request;
 
 class hotmartController extends Controller
@@ -14,14 +15,14 @@ class hotmartController extends Controller
      */
     public function index()
     {
-        echo "<pre>";
+        // echo "<pre>";
+        // (new AuthController('MTRjODhmNTgtMmVkOC00YTIyLWJhMTctYjI5MjI0ODAxY2E2OjlmYjc0YzdlLTkwZTYtNDkxZi04ZTI0LTE3NzM1ZWJiNTQxZg==','14c88f58-2ed8-4a22-ba17-b29224801ca6','9fb74c7e-90e6-491f-8e24-17735ebb541f'))->resource();
 
-        $auth = new AuthController('MTRjODhmNTgtMmVkOC00YTIyLWJhMTctYjI5MjI0ODAxY2E2OjlmYjc0YzdlLTkwZTYtNDkxZi04ZTI0LTE3NzM1ZWJiNTQxZg==','14c88f58-2ed8-4a22-ba17-b29224801ca6','9fb74c7e-90e6-491f-8e24-17735ebb541f');
-        $auth->resource();
+        // $getOrder = new getAllOrderHotmart('14c88f58-2ed8-4a22-ba17-b29224801ca6');
+        // print_r($getOrder->resource());
 
-        $getOrder = new getAllOrderHotmart('14c88f58-2ed8-4a22-ba17-b29224801ca6');
-        print_r($getOrder->resource());
-
+        $getOrder = (new GetOrderRequestController())->resource();
+        print_r($getOrder);
     }
 
     /**
