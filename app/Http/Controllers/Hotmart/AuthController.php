@@ -49,7 +49,13 @@ class AuthController implements RequestApi
         // PEGA DATA ATUAL
         $datahoje = new DateTime();
 
-        $dataModificada = new DateTime($token->datamodify);
+        if(isset($token->datamodify)){
+            $dataModificada = new DateTime($token->datamodify);
+        }else{
+            $dataModificada = new DateTime();
+            $dataModificada->modify('-1 day');
+        }
+
 
         if ($dataModificada < $datahoje) {
             try {

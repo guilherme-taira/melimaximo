@@ -29,7 +29,6 @@ class TrataDadosRequestHotmart extends Controller
             $data[$i]['dataAprovado'] = $orders->purchase->approved_date;
             $data[$i]['id'] = $orders->product->id;
             $data[$i]['produto'] = $orders->product->name;
-
             $i++;
         }
 
