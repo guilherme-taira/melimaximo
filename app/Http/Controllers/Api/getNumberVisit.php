@@ -145,9 +145,9 @@ class getNumberVisit extends Controller
                 }
             } catch (\Exception $e) {
                 //return response()->json($i);
+                echo $e->getMessage();
                 continue;
             }
-            sleep(1);
         }
     }
 }

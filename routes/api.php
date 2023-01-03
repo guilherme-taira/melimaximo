@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Ajax\RastreioProdutoController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\getaDataProductController;
+use App\Http\Controllers\Api\GetDataSellerController;
 use App\Http\Controllers\Api\getNumberVisit;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -36,6 +38,8 @@ Route::prefix('v1')->group(function () {
     Route::get('visitasMounth', [getNumberVisit::class, 'getVisitsMounth']);
     Route::get('getMetricsMercadoLivre150days', [getNumberVisit::class, 'getMetricsMercadoLivre']);
     Route::get('getSellerId', [UserController::class, 'getUserApiMl']);
+    Route::get('getItem',[GetDataSellerController::class,'getItem']);
+    Route::get('getDataProduct',[getaDataProductController::class,'getDataProduct']);
     // Route::group(['middleware' => ['apiJwt']], function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
         // LISTAR USUARIOS
