@@ -98,4 +98,42 @@ class UserController extends Controller
             return response()->json($array, 200);
         }
     }
+
+
+    public function getAllItemApiMl(Request $request)
+    {
+        $i = 0;
+        $array = [];
+        while (true) {
+            try {
+                foreach ($request->data as $produto) {
+                    $endpointMetrics = "https://api.mercadolibre.com/items/" . $produto;
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $endpointMetrics);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($ch);
+                    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    curl_close($ch);
+                    $dados = json_decode($response);
+                    if ($httpcode == '200') {
+                        $array[$i] = $dados;
+                        $i++;
+                    } else if ($httpcode == '429' || $httpcode == '500') {
+                        $array['error'] = "ERRO 429";
+                        continue;
+                    }
+                    if ($i == 56) {
+                        break;
+                    }
+                }
+                return response()->json(["dados" => $array]);
+            } catch (\Exception $e) {
+                //return response()->json($i);
+                continue;
+            }
+        }
+    }
 }

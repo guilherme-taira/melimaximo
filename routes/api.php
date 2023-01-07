@@ -38,6 +38,7 @@ Route::prefix('v1')->group(function () {
     Route::get('visitasMounth', [getNumberVisit::class, 'getVisitsMounth']);
     Route::get('getMetricsMercadoLivre150days', [getNumberVisit::class, 'getMetricsMercadoLivre']);
     Route::get('getSellerId', [UserController::class, 'getUserApiMl']);
+    Route::post('getAllItem', [UserController::class, 'getAllItemApiMl']);
     Route::get('getItem',[GetDataSellerController::class,'getItem']);
     Route::get('getDataProduct',[getaDataProductController::class,'getDataProduct']);
     // Route::group(['middleware' => ['apiJwt']], function () {
