@@ -20,12 +20,11 @@ class AuthController extends Controller
             'email' => 'required|string',
         ]);
 
-
         $user = User::where('email', $request->email)->first();
 
         // VALIDA O EMAIL
         if (!$user) {
-            return response(['message' => 'Credencias Inválidas!'], 401);
+            return response(['message' => 'Credencias Inválidas!'], 200);
         }
 
         $token = $user->createToken('newToken')->plainTextToken;

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\getaDataProductController;
 use App\Http\Controllers\Api\GetDataSellerController;
 use App\Http\Controllers\Api\getNumberVisit;
+use App\Http\Controllers\api\getProductById;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,6 @@ Route::prefix('v1')->group(function () {
     // LISTAR TODOS OS PEDIDOS
     Route::post('rastreios', [RastreioProdutoController::class, 'store']);
     Route::get('rastreios', [RastreioProdutoController::class, 'index']);
-
     // GET VISITAS
     Route::get('visitas', [getNumberVisit::class, 'index']);
     Route::get('visitasMounth', [getNumberVisit::class, 'getVisitsMounth']);
@@ -41,12 +41,16 @@ Route::prefix('v1')->group(function () {
     Route::post('getAllItem', [UserController::class, 'getAllItemApiMl']);
     Route::get('getItem',[GetDataSellerController::class,'getItem']);
     Route::get('getDataProduct',[getaDataProductController::class,'getDataProduct']);
+    Route::get('getProductById',[getProductById::class,'getProduct']);
+    Route::get('getDescription',[getProductById::class,'getDescription']);
+    Route::get('getIntegrado',[getProductById::class,'verificaProdutoIntegrado']);
+    Route::get('getImage',[getProductById::class,'pegaImagem']);
+    Route::get('adrian',[UserController::class,'trocapalavra']);
     // Route::group(['middleware' => ['apiJwt']], function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
         // LISTAR USUARIOS
         Route::post('users/{id}', [UserController::class, 'show']);
     });
-
     // LOGAR NA PLATAFORMA
     Route::post('auth/login', [AuthController::class, 'login']);
 });

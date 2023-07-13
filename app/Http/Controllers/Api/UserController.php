@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\Sanctum;
 
@@ -47,6 +48,9 @@ class UserController extends Controller
             ['*']
         );
 
+        if(!$users){
+            return response()->json(["msg" => "Credencias Inválidas!"],200);
+        }
         return response()->json($users);
     }
 
@@ -100,6 +104,10 @@ class UserController extends Controller
     }
 
 
+    public function trocapalavra(Request $request){
+        return response()->json(["respostaAdrian" => "<b>$request->texto</b>"]);
+    }
+
     public function getAllItemApiMl(Request $request)
     {
         $i = 0;
@@ -118,8 +126,11 @@ class UserController extends Controller
                     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                     curl_close($ch);
                     $dados = json_decode($response);
+                    $dataAtual = new DateTime();
                     if ($httpcode == '200') {
-                        $array[$i] = $dados;
+                        $data = new GetDataSellerController();
+                        $date = new getNumberVisit();
+                        array_push($array,["data" => $dados, "dadosproduto" => $data->getItem($produto)]);
                         $i++;
                     } else if ($httpcode == '429' || $httpcode == '500') {
                         $array['error'] = "ERRO 429";

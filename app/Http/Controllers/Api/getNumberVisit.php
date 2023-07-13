@@ -83,6 +83,41 @@ class getNumberVisit extends Controller
         return json_decode($response);
     }
 
+    public function getVisits30Days($id)
+    {
+
+    $endpoint = "https://api.mercadolibre.com/items/" . $id . "/visits/time_window?last=30&unit=day&ending=2023-06-01";
+    /**
+     * CURL REQUISICAO -X GET
+     * **/
+    while(true) {
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $endpoint);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            $dados = json_decode($response);
+            $array = [];
+            if ($httpcode == '200') {
+                $array['id'] = $id;
+                $array['total'] = $dados->total_visits;
+                return response()->json($array);
+                break;
+            } elseif($httpcode == '429') {
+                continue;
+            }
+        } catch (\Exception $e) {
+            //return response()->json($i);
+            continue;
+        }
+
+    }
+}
 
     public function getVisitsMounth(Request $request)
     {
