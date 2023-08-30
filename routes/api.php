@@ -37,6 +37,7 @@ Route::prefix('v1')->group(function () {
     Route::get('visitas', [getNumberVisit::class, 'index']);
     Route::get('visitasMounth', [getNumberVisit::class, 'getVisitsMounth']);
     Route::get('getMetricsMercadoLivre150days', [getNumberVisit::class, 'getMetricsMercadoLivre']);
+    Route::get('getMetricsMercadoForGraphic', [getNumberVisit::class, 'getMetricsMercadoLivreGraphic']);
     Route::get('getSellerId', [UserController::class, 'getUserApiMl']);
     Route::post('getAllItem', [UserController::class, 'getAllItemApiMl']);
     Route::get('getItem',[GetDataSellerController::class,'getItem']);
@@ -46,6 +47,7 @@ Route::prefix('v1')->group(function () {
     Route::get('getIntegrado',[getProductById::class,'verificaProdutoIntegrado']);
     Route::get('getImage',[getProductById::class,'pegaImagem']);
     Route::get('adrian',[UserController::class,'trocapalavra']);
+    Route::post('zipper',[getaDataProductController::class,'getPhotos']);
     // Route::group(['middleware' => ['apiJwt']], function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
         // LISTAR USUARIOS

@@ -35,6 +35,7 @@ class AuthController extends Controller
             'user' => $user->name,
             'token' => $token,
             'code' => 200,
+            'created_at' => $user->created_at
         ];
 
         return response()->json($response, 201);

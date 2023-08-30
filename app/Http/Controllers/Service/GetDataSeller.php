@@ -25,6 +25,7 @@ class GetDataSeller extends requestTemplateController
     public function resource(){
         return $this->get("users/".$this->getSellerId());
     }
+
     public function get($resource){
         $endpointMetrics = self::URL_BASE_ML.$resource;
         $array = [];
@@ -55,6 +56,28 @@ class GetDataSeller extends requestTemplateController
         }
     }
 
+
+    public function resourceGetData(){
+        return $this->getSellerData("users/".$this->getSellerId());
+    }
+
+    public function getSellerData($resource){
+        $endpointMetrics = self::URL_BASE_ML.$resource;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $endpointMetrics);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        $dados = json_decode($response);
+        if ($httpcode == '200') {
+            // SETA AS VARIAVEIS NA CLASSE DAO
+            return json_decode(json_encode($dados));
+        }
+    }
     /**
      * Get the value of sellerId
      */

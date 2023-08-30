@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DAO\sellerDao;
+use App\Http\Controllers\Service\GetDataSeller;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
@@ -128,9 +130,13 @@ class UserController extends Controller
                     $dados = json_decode($response);
                     $dataAtual = new DateTime();
                     if ($httpcode == '200') {
+                        $DAO = new sellerDao();
+                        $getDataSeller = new GetDataSeller($dados->seller_id, $DAO);
+                        $seller = $getDataSeller->resourceGetData();
+
                         $data = new GetDataSellerController();
                         $date = new getNumberVisit();
-                        array_push($array,["data" => $dados, "dadosproduto" => $data->getItem($produto)]);
+                        array_push($array,["data" => $dados, "dadosproduto" => $data->getItem($produto), "seller" => $seller,"id" => $produto]);
                         $i++;
                     } else if ($httpcode == '429' || $httpcode == '500') {
                         $array['error'] = "ERRO 429";
@@ -142,8 +148,8 @@ class UserController extends Controller
                 }
                 return response()->json(["dados" => $array]);
             } catch (\Exception $e) {
-                //return response()->json($i);
-                continue;
+                // return response()->json($produto);
+                 continue;
             }
         }
     }

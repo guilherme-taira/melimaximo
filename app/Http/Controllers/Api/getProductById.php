@@ -113,4 +113,27 @@ class getProductById extends Controller
             return response()->json($e->getMessage());
         }
     }
+
+    public function getProductByIdGraphic(Request $request)
+    {
+        $array = [];
+        // ENDPOINT PARA REQUISICAO
+        $endpoint = 'https://api.mercadolibre.com/items/' . $request->id;
+
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $endpoint);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            $dados = json_decode($response);
+            return $dados;
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
 }

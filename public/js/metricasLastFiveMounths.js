@@ -46,6 +46,7 @@ $(document).ready(function () {
             const {
                 results
             } = response;
+            console.log(response);
             const days = [];
             const visitas = [];
             results.forEach(function (i, index) {
@@ -57,30 +58,7 @@ $(document).ready(function () {
                 days[index] = formatDate(new Date(date));
             });
 
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: days,
-                    datasets: [{
-                        label: '',
-                        data: visitas,
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
 
-            // hide loading
-            $("#loaderDiv").hide();
         },
         error: function (error) {
             console.log(error);

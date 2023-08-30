@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\api\getProductById;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -85,39 +86,37 @@ class getNumberVisit extends Controller
 
     public function getVisits30Days($id)
     {
-
-    $endpoint = "https://api.mercadolibre.com/items/" . $id . "/visits/time_window?last=30&unit=day&ending=2023-06-01";
-    /**
-     * CURL REQUISICAO -X GET
-     * **/
-    while(true) {
-        try {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $endpoint);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($ch);
-            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-            $dados = json_decode($response);
-            $array = [];
-            if ($httpcode == '200') {
-                $array['id'] = $id;
-                $array['total'] = $dados->total_visits;
-                return response()->json($array);
-                break;
-            } elseif($httpcode == '429') {
+        $endpoint = "https://api.mercadolibre.com/items/" . $id . "/visits/time_window?last=30&unit=day&ending=2023-06-01";
+        /**
+         * CURL REQUISICAO -X GET
+         * **/
+        while (true) {
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $endpoint);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                curl_close($ch);
+                $dados = json_decode($response);
+                $array = [];
+                if ($httpcode == '200') {
+                    $array['id'] = $id;
+                    $array['total'] = $dados->total_visits;
+                    return response()->json($array);
+                    break;
+                } elseif ($httpcode == '429') {
+                    continue;
+                }
+            } catch (\Exception $e) {
+                //return response()->json($i);
                 continue;
             }
-        } catch (\Exception $e) {
-            //return response()->json($i);
-            continue;
         }
-
     }
-}
 
     public function getVisitsMounth(Request $request)
     {
@@ -125,7 +124,7 @@ class getNumberVisit extends Controller
         /**
          * CURL REQUISICAO -X GET
          * **/
-        while(true){
+        while (true) {
             try {
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $endpoint);
@@ -143,11 +142,44 @@ class getNumberVisit extends Controller
                     $array['total'] = $dados->total_visits;
                     return response()->json($array);
                     break;
-                }else if($httpcode == '429'){
+                } else if ($httpcode == '429') {
                     continue;
                 }
             } catch (\Exception $e) {
                 //return response()->json($i);
+                continue;
+            }
+        }
+    }
+
+    public function getMetricsMercadoLivreGraphic(Request $request)
+    {
+        $endpointMetrics = "https://api.mercadolibre.com/items/" . $request->id . "/visits/time_window?last=150&unit=day";
+        /**
+         * CURL REQUISICAO -X GET
+         * **/
+        while (true) {
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $endpointMetrics);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                curl_close($ch);
+                $dados = json_decode($response);
+                if ($httpcode == '200') {
+                    $data = new getProductById();
+                    return response()->json(["visitas" => $dados], ["data" => $data->getProductById($request->id)]);
+                    break;
+                } else if ($httpcode == '429') {
+                    continue;
+                }
+            } catch (\Exception $e) {
+                //return response()->json($i);
+                echo $e->getMessage();
                 continue;
             }
         }
@@ -175,7 +207,7 @@ class getNumberVisit extends Controller
                 if ($httpcode == '200') {
                     return response()->json($dados);
                     break;
-                }else if($httpcode == '429'){
+                } else if ($httpcode == '429') {
                     continue;
                 }
             } catch (\Exception $e) {
