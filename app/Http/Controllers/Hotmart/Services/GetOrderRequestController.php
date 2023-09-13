@@ -36,7 +36,7 @@ class GetOrderRequestController extends requestTemplateController
         curl_close($ch);
         echo "<pre>";
         $dados = json_decode($response);
-
+        print_r($dados);
         $trataDados = (new TrataDadosRequestHotmart($dados))->TrataDados();
         (new saveNewOrder)->saveNewOrder($trataDados);
     }

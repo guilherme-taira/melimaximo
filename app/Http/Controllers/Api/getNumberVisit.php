@@ -64,7 +64,6 @@ class getNumberVisit extends Controller
         //
     }
 
-
     public function getVisits($id, $date)
     {
 

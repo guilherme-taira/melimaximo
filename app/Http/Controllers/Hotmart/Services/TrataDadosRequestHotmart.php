@@ -17,10 +17,9 @@ class TrataDadosRequestHotmart extends Controller
 
     public function TrataDados(): array
     {
-
+        $data = [];
         $i = 0;
         foreach ($this->response->items as $orders) {
-            $data = [];
             $data[$i]['numeroPedido'] = $orders->purchase->transaction;
             $data[$i]['name'] = $orders->buyer->name;
             $data[$i]['email'] = $orders->buyer->email;

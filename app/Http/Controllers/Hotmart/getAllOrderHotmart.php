@@ -16,7 +16,7 @@ class getAllOrderHotmart implements RequestApi
 
     public function resource()
     {
-        return $this->get('payments/api/v1/sales/history?transaction_status=COMPLETE');
+        return $this->get('payments/api/v1/sales/history?transaction_status=APPROVED');
     }
 
     public function __construct($client_id)
@@ -29,7 +29,7 @@ class getAllOrderHotmart implements RequestApi
 
         // ENDPOINT PARA REQUISICAO
         $ENDPOINT = self::URL_BASE_ORDER.$resource;
-        echo $ENDPOINT;
+
         $getToken = token::where('user_id',$this->getClient_id())->first();
         $token = $getToken->access_token;
         $headers = array(

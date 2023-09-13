@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -22,6 +23,8 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
+        $dataNow = new DateTime();
+
         // VALIDA O EMAIL
         if (!$user) {
             return response(['message' => 'Credencias Inválidas!'], 200);
@@ -31,12 +34,24 @@ class AuthController extends Controller
 
         User::where('email', $request->email)->update(['access_token' => $token]);
 
-        $response = [
-            'user' => $user->name,
-            'token' => $token,
-            'code' => 200,
-            'created_at' => $user->created_at
-        ];
+        if (strtotime($user->expira_prazo) > strtotime($dataNow->format('Y-m-d H:i:s'))) {
+            $response = [
+                'user' => $user->name,
+                'token' => $token,
+                'code' => 200,
+                'expira_prazo' => $user->expira_prazo,
+                'created_at' => $user->created_at
+            ];
+        } else {
+            $response = [
+                'user' => $user->name,
+                'token' => "000",
+                'code' => 200,
+                'expira_prazo' => $user->expira_prazo,
+                'created_at' => $user->created_at
+            ];
+        }
+
 
         return response()->json($response, 201);
     }
