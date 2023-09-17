@@ -208,7 +208,7 @@
         const idMl = getUrlParameter('id');
 
         $.ajax({
-            url: `http://3.135.237.155/api/v1/getMetricsMercadoLivre150days?id=${idMl}`,
+            url: `https://seeai.com.br/api/v1/getMetricsMercadoLivre150days?id=${idMl}`,
             method: 'GET',
             headers: {
                 Accept: 'aplication/json',
@@ -442,7 +442,7 @@
         // CODIGO QUE PEGA POR MES AS VISITAS
 
         $.ajax({
-            url: `http://3.135.237.155/api/v1/getMetricsMercadoLivre150days?id=${idMl}`,
+            url: `https://seeai.com.br/api/v1/getMetricsMercadoLivre150days?id=${idMl}`,
             method: 'GET',
             headers: {
                 Accept: 'aplication/json',
@@ -674,7 +674,7 @@
         }
 
         $.ajax({
-            url: `http://3.135.237.155/api/v1/getMetricsMercadoLivre150days?id=${idMl}`,
+            url: `https://seeai.com.br/api/v1/getMetricsMercadoLivre150days?id=${idMl}`,
             method: 'GET',
             headers: {
                 Accept: 'aplication/json',
