@@ -69,11 +69,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script>
-
         var mesesDiv = document.querySelector("#wrapper > div > div > div > div.row.mt-4 > div.col-md-5 > div");
 
         mesesDiv.insertAdjacentHTML('afterbegin',
-        `
+            `
         <div class='mlprice-Container-width-small' id='mlLoading'>
             <img src="https://usagif.com/wp-content/uploads/loading-23.gif" class="loadingPicture">
         </div>
@@ -82,26 +81,28 @@
         var diasDiv = document.querySelector("#wrapper > div > div > div > div.row.mt-4 > div.col-md-7 > div");
 
         diasDiv.insertAdjacentHTML('afterbegin',
-        `
+            `
         <div class='mlprice-Container-width-small' id='mlLoadingDias'>
             <img src="https://usagif.com/wp-content/uploads/loading-23.gif" class="loadingPicture">
         </div>
         `);
 
-        var conversaoTaxa = document.querySelector("#wrapper > div > div > div > div:nth-child(2) > div.col-md-5 > div.box.radialbox.mt-4");
+        var conversaoTaxa = document.querySelector(
+            "#wrapper > div > div > div > div:nth-child(2) > div.col-md-5 > div.box.radialbox.mt-4");
 
         conversaoTaxa.insertAdjacentHTML('afterbegin',
-        `
+            `
         <div class='mlprice-Container-width-small' id='mlLoadingConversao'>
             <img src="https://usagif.com/wp-content/uploads/loading-23.gif" class="loadingPicture">
         </div>
         `);
 
 
-        var conversaoVisitasMes = document.querySelector("#wrapper > div > div > div > div:nth-child(2) > div.col-md-7 > div");
+        var conversaoVisitasMes = document.querySelector(
+            "#wrapper > div > div > div > div:nth-child(2) > div.col-md-7 > div");
 
         conversaoVisitasMes.insertAdjacentHTML('afterbegin',
-        `
+            `
         <div class='mlprice-Container-width-small' id='mlLoadingConversaoTaxa'>
             <img src="https://usagif.com/wp-content/uploads/loading-23.gif" class="loadingPicture">
         </div>
@@ -168,7 +169,7 @@
                 li.textContent = gtin;
                 $("#gtinList").append(
                     `<li><span class="tamanho-gtin">${gtin}</span> <i class='bi bi-clipboard'></i></li>`
-                    );
+                );
             }
 
         }
@@ -277,7 +278,41 @@
                             }],
                             chart: {
                                 height: 350,
-                                type: 'area'
+                                type: 'area',
+                                toolbar: {
+                                    show: true,
+                                    offsetX: 0,
+                                    offsetY: 0,
+                                    tools: {
+                                        download: true,
+                                        selection: true,
+                                        zoom: true,
+                                        zoomin: true,
+                                        zoomout: true,
+                                        pan: true,
+                                        reset: true |
+                                            '<img src="/static/icons/reset.png" width="20">',
+                                        customIcons: []
+                                    },
+                                    export: {
+                                        csv: {
+                                            filename: undefined,
+                                            columnDelimiter: ',',
+                                            headerCategory: 'category',
+                                            headerValue: 'value',
+                                            dateFormatter(timestamp) {
+                                                return new Date(timestamp).toDateString()
+                                            }
+                                        },
+                                        svg: {
+                                            filename: undefined,
+                                        },
+                                        png: {
+                                            filename: undefined,
+                                        }
+                                    },
+                                    autoSelected: 'zoom'
+                                },
                             },
                             title: {
                                 floating: true,
@@ -300,6 +335,7 @@
                                     format: 'dd/MM/yy HH:mm'
                                 },
                             },
+
                         };
 
                         var chartLine = new ApexCharts(
@@ -597,6 +633,40 @@
                                 chart: {
                                     height: 350,
                                     type: 'line',
+                                    toolbar: {
+                                        show: true,
+                                        offsetX: 0,
+                                        offsetY: 0,
+                                        tools: {
+                                            download: true,
+                                            selection: true,
+                                            zoom: true,
+                                            zoomin: true,
+                                            zoomout: true,
+                                            pan: true,
+                                            reset: true |
+                                                '<img src="/static/icons/reset.png" width="20">',
+                                            customIcons: []
+                                        },
+                                        export: {
+                                            csv: {
+                                                filename: undefined,
+                                                columnDelimiter: ',',
+                                                headerCategory: 'category',
+                                                headerValue: 'value',
+                                                dateFormatter(timestamp) {
+                                                    return new Date(timestamp).toDateString()
+                                                }
+                                            },
+                                            svg: {
+                                                filename: undefined,
+                                            },
+                                            png: {
+                                                filename: undefined,
+                                            }
+                                        },
+                                        autoSelected: 'zoom'
+                                    },
                                 },
                                 stroke: {
                                     width: [0, 4, 4]
