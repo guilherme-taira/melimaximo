@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         // VALIDA O EMAIL
         if (!$user) {
-            return response(['message' => 'Credencias Inválidas!'], 200);
+            return response(['message' => 'Credencias Inválidas!','code' => '401'], 200);
         }
 
         $token = $user->createToken('newToken')->plainTextToken;
