@@ -63,15 +63,16 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken(Request $request)
     {
+        $user = User::where('access_token',$request->token)->first();
 
-        // return response()->json([
-        //     'access_token' => $token,
-        //     'token_type' => 'bearer',
-        //     'expires_in' => auth('api')->factory()->getTTL() * 1,
-        //     'code' => '200',
-        // ]);
+        if(!$user){
+            return response()->json([
+                'code' => '401',
+            ]);
+        }
+
     }
 
 

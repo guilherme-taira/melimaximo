@@ -48,6 +48,7 @@ Route::prefix('v1')->group(function () {
     Route::get('getImage',[getProductById::class,'pegaImagem']);
     Route::get('adrian',[UserController::class,'trocapalavra']);
     Route::post('zipper',[getaDataProductController::class,'getPhotos']);
+    Route::get('verificaToken',[AuthController::class,'respondWithToken']);
     // Route::group(['middleware' => ['apiJwt']], function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
         // LISTAR USUARIOS
