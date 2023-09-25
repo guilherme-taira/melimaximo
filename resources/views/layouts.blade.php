@@ -478,7 +478,7 @@
         // CODIGO QUE PEGA POR MES AS VISITAS
 
         $.ajax({
-            url: `https://seeai.com.br/api/v1/getMetricsMercadoLivre150days?id=${idMl}`,
+            url: `https://www.mercadolivrehub.embaleme.com.br/api/v1/getMetricsMercadoLivre150days?id=${idMl}`,
             method: 'GET',
             headers: {
                 Accept: 'aplication/json',
