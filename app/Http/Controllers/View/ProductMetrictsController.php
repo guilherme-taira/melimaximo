@@ -11,5 +11,9 @@ class ProductMetrictsController extends Controller
 
         return view('layouts',['id' => $request->all()]);
     }
+
+    public function politicas(){
+        return view('politics');
+    }
 }
 
