@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class ProductMetrictsController extends Controller
 {
     public function getMetrics(Request $request){
-
         return view('layouts',['id' => $request->all()]);
     }
 
@@ -16,4 +15,3 @@ class ProductMetrictsController extends Controller
         return view('politics');
     }
 }
-
