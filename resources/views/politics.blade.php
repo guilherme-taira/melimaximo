@@ -1,55 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Politicas de Privacidde</title>
+    <title>Política de Privacidade da Webstore</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: auto;
+            padding: 20px;
+            width: 1000px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            text-align: justify;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ol {
+            margin-left: 20px;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Política de Privacidade da Webstore</h1>
 
-    <ol>
-        <li>
-            <strong>1. Coleta de informações pessoais:</strong>
-            Identificamos os tipos de informações pessoais que coletamos, como nomes, endereços de e-mail, endereços físicos, informações de pagamento, histórico de compras, etc.
-        </li>
-        <li>
-            <strong>2. Finalidade da coleta:</strong>
-            Coletamos informações pessoais apenas para fins específicos, como processamento de pedidos, envio de atualizações sobre promoções e produtos, etc.
-        </li>
-        <li>
-            <strong>3. Uso das informações:</strong>
-            Utilizamos as informações coletadas exclusivamente para os fins especificados e garantimos transparência em relação ao uso.
-        </li>
-        <li>
-            <strong>4. Proteção de informações:</strong>
-            Implementamos medidas de segurança, como criptografia, senhas seguras e acesso restrito, para proteger os dados pessoais dos clientes.
-        </li>
-        <li>
-            <strong>5. Compartilhamento de informações:</strong>
-            Compartilhamos informações com terceiros, como serviços de pagamento e empresas de transporte, apenas quando necessário para atender às necessidades do cliente.
-        </li>
-        <li>
-            <strong>6. Cookies e rastreamento:</strong>
-            Utilizamos cookies e tecnologias de rastreamento. Os visitantes têm a opção de aceitar ou recusar o rastreamento de acordo com as regulamentações de privacidade.
-        </li>
-        <li>
-            <strong>7. Direitos do cliente:</strong>
-            Os clientes têm direitos em relação aos dados pessoais, incluindo o direito de acessar, corrigir ou excluir suas informações.
-        </li>
-        <li>
-            <strong>8. Contato:</strong>
-            Para dúvidas ou preocupações sobre nossa política de privacidade, entre em contato conosco em [seu endereço de e-mail de contato].
-        </li>
-        <li>
-            <strong>9. Atualizações na política:</strong>
-            Reservamos o direito de atualizar nossa política de privacidade conforme necessário e notificaremos os clientes sobre mudanças significativas.
-        </li>
-        <li>
-            <strong>10. Legislação aplicável:</strong>
-            Nossa política de privacidade está em conformidade com as leis de proteção de dados [indique as leis ou regulamentos aplicáveis ​​no seu país/região].
-        </li>
-    </ol>
+    <p>Esta Política de Privacidade descreve como coletamos, usamos, protegemos e compartilhamos informações pessoais quando você utiliza nossos serviços ou interage conosco. Ao utilizar nossos serviços, você concorda com a coleta e uso das informações de acordo com esta política.</p>
+
+    <h2>Coleta de Informações</h2>
+    <p>Coletamos informações pessoais que você nos fornece diretamente, como nomes, endereços de e-mail, informações de pagamento e detalhes de envio quando você realiza uma compra em nossa webstore.</p>
+    <p>Também coletamos informações automaticamente quando você visita nosso site, incluindo seu endereço IP, informações de cookies e dados de rastreamento de terceiros, como o Google Analytics.</p>
+
+    <h2>Uso das Informações</h2>
+    <p>Utilizamos as informações coletadas para processar pedidos, fornecer suporte ao cliente, enviar atualizações sobre produtos e promoções, melhorar nosso site e personalizar sua experiência de compra.</p>
+
+    <h2>Proteção de Informações</h2>
+    <p>Implementamos medidas de segurança para proteger suas informações pessoais, incluindo criptografia de dados, senhas seguras e acesso restrito às informações.</p>
+
+    <h2>Compartilhamento de Informações</h2>
+    <p>Compartilhamos informações com terceiros apenas quando necessário para atender às suas necessidades, como serviços de pagamento, empresas de transporte e parceiros de marketing. Não vendemos ou alugamos suas informações pessoais para terceiros.</p>
+
+    <h2>Cookies e Rastreamento</h2>
+    <p>Utilizamos cookies e tecnologias de rastreamento para melhorar a funcionalidade do site e entender como os visitantes interagem com ele. Você pode controlar o uso de cookies nas configurações do seu navegador.</p>
+
+    <h2>Direitos do Cliente</h2>
+    <p>Você tem o direito de acessar, corrigir ou excluir suas informações pessoais. Se desejar exercer esses direitos, entre em contato conosco através do [seu endereço de e-mail de contato].</p>
+
+    <h2>Atualizações na Política</h2>
+    <p>Reservamos o direito de atualizar nossa política de privacidade conforme necessário. Notificaremos os clientes sobre mudanças significativas através do nosso site.</p>
+
+    <h2>Legislação Aplicável</h2>
+    <p>Nossa política de privacidade está em conformidade com as leis de proteção de dados [indique as leis ou regulamentos aplicáveis ​​no seu país/região].</p>
 </body>
 </html>
