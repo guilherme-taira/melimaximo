@@ -19,6 +19,60 @@ class getNumberVisit extends Controller
         return response()->json($dados);
     }
 
+    public function informationPagination(){
+            // Specify the URL of the endpoint you want to request.
+    $endpointUrl = 'https://lista.mercadolivre.com.br/alimentos-bebidas/mercearia/chocolate_Desde_51_NoIndex_True';
+
+    // Initialize cURL session.
+    $curl = curl_init();
+
+    // Set cURL options.
+    curl_setopt($curl, CURLOPT_URL, $endpointUrl);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute the cURL session to make the request.
+    $response = curl_exec($curl);
+
+    // Check for cURL errors.
+    if (curl_errno($curl)) {
+        echo 'cURL error: ' . curl_error($curl);
+        // Handle the error as needed.
+    } else {
+        // HTTP request was successful.
+
+        // You can now work with the response data, for example, echo it:
+         print_r($response);
+    }
+    }
+
+    public function information(Request $request){
+
+        // Specify the URL of the endpoint you want to request.
+        $input = file_get_contents('php://input');
+        $array = json_decode($input,false);
+
+        // Initialize cURL session.
+        $curl = curl_init();
+
+        // Set cURL options.
+        curl_setopt($curl, CURLOPT_URL, $array->link);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        // Execute the cURL session to make the request.
+        $response = curl_exec($curl);
+
+        // Check for cURL errors.
+        if (curl_errno($curl)) {
+            echo 'cURL error: ' . curl_error($curl);
+            // Handle the error as needed.
+        } else {
+        // HTTP request was successful.
+
+        // You can now work with the response data, for example, echo it:
+        print_r($response);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *

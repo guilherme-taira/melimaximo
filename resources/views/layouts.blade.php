@@ -16,7 +16,6 @@
 
 <body>
 
-
     <div id="chart"></div>
     <div id="wrapper">
         <div class="content-area">

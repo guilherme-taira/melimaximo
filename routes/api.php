@@ -34,6 +34,8 @@ Route::prefix('v1')->group(function () {
     Route::post('rastreios', [RastreioProdutoController::class, 'store']);
     Route::get('rastreios', [RastreioProdutoController::class, 'index']);
     // GET VISITAS
+    Route::post('getInformation', [getNumberVisit::class, 'information']);
+    Route::get('informationPagination',[getNumberVisit::class, 'informationPagination']);
     Route::get('visitas', [getNumberVisit::class, 'index']);
     Route::get('visitasMounth', [getNumberVisit::class, 'getVisitsMounth']);
     Route::get('getMetricsMercadoLivre150days', [getNumberVisit::class, 'getMetricsMercadoLivre']);
