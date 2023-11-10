@@ -1,0 +1,27 @@
+{
+    "manifest_version":3,
+    "name": "Afilidrop",
+    "version": "0.0.2",
+    "action":{
+        "default_icon" : "assets/calculate.png",
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.mercadolivre.com.br/*",
+                "https://*.mercadolivre.com /*",
+                "http://127.0.0.1/*"
+            ],
+            "css": ["style.css"],
+            "js": ["index.js"]
+        }
+    ],
+    "permissions": [
+        "webRequest",
+        "tabs",
+        "clipboardWrite",
+        "clipboardRead",
+        "storage"
+    ]
+}

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\api\getProductById;
 use App\Http\Controllers\Controller;
+use DOMDocument;
 use Illuminate\Http\Request;
 
 class getNumberVisit extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -33,15 +35,23 @@ class getNumberVisit extends Controller
     // Execute the cURL session to make the request.
     $response = curl_exec($curl);
 
+    $document = new \DOMDocument('1.0', 'UTF-8');
+    // set error level
+    $internalErrors = libxml_use_internal_errors(true);
+    // load HTML
+    $document->loadHTML($response);
+    // Restore error level
+    libxml_use_internal_errors($internalErrors);
+    $modifiedHtml = $document->saveHTML();
+
+
     // Check for cURL errors.
     if (curl_errno($curl)) {
         echo 'cURL error: ' . curl_error($curl);
         // Handle the error as needed.
     } else {
         // HTTP request was successful.
-
-        // You can now work with the response data, for example, echo it:
-         print_r($response);
+        print_r($modifiedHtml);
     }
     }
 
@@ -50,29 +60,52 @@ class getNumberVisit extends Controller
         // Specify the URL of the endpoint you want to request.
         $input = file_get_contents('php://input');
         $array = json_decode($input,false);
+        $arrayHtml = [];
+
+        $novoNumero = 50;
+        for ($index = 1; $index <= $array->pagina; $index++) {
 
         // Initialize cURL session.
         $curl = curl_init();
 
         // Set cURL options.
-        curl_setopt($curl, CURLOPT_URL, $array->link);
+        curl_setopt($curl, CURLOPT_URL, $this->removerNumeroNaURL($array->link,$novoNumero));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         // Execute the cURL session to make the request.
         $response = curl_exec($curl);
-
         // Check for cURL errors.
         if (curl_errno($curl)) {
             echo 'cURL error: ' . curl_error($curl);
             // Handle the error as needed.
         } else {
-        // HTTP request was successful.
-
         // You can now work with the response data, for example, echo it:
-        print_r($response);
+            $document = new \DOMDocument('1.0', 'UTF-8');
+            // set error level
+            $internalErrors = libxml_use_internal_errors(true);
+            // load HTML
+            $document->loadHTML($response);
+            // Restore error level
+            libxml_use_internal_errors($internalErrors);
+            $modifiedHtml = $document->saveHTML();
+            array_push($arrayHtml,$modifiedHtml);
         }
+          $novoNumero += 50;
+        }
+        return json_encode($arrayHtml);
+
     }
 
+    function removerNumeroNaURL($url,$novoNumero) {
+        $newValue = 51 + $novoNumero;
+        if($novoNumero == 51){
+            $newValue = 51;
+        }
+        // Substitua "51" por uma string vazia para remover o número
+        $novaURL = str_replace("51", $newValue, $url);
+
+        return $novaURL;
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -269,5 +302,7 @@ class getNumberVisit extends Controller
                 continue;
             }
         }
+
     }
+
 }

@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
     <div id="chart"></div>
     <div id="wrapper">
         <div class="content-area">
@@ -95,7 +94,6 @@
             <img src="https://usagif.com/wp-content/uploads/loading-23.gif" class="loadingPicture">
         </div>
         `);
-
 
         var conversaoVisitasMes = document.querySelector(
             "#wrapper > div > div > div > div:nth-child(2) > div.col-md-7 > div");

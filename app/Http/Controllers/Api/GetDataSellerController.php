@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 
 class GetDataSellerController extends Controller
 {
-
     public function getItem($id)
     {
-
         // ENDPOINT PARA REQUISICAO
         $endpoint = "https://api.mercadolibre.com/reviews/item/".$id;
         $array = [];

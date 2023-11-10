@@ -74,7 +74,10 @@ class getaDataProductController extends Controller
         // }
     }
 
-
+    public function ManipulateData(Request $request)
+    {
+       return response()->json(['data' => $request->all()]);
+    }
 
     public function getPhotos(Request $request)
     {
